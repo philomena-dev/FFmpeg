@@ -286,6 +286,7 @@ External library support:
   --enable-libvorbis       enable Vorbis en/decoding via libvorbis,
                            native implementation exists [no]
   --enable-libvpx          enable VP8 and VP9 de/encoding via libvpx [no]
+  --enable-libsvtvp9       enable VP9 encoding via svt [no]
   --enable-libwebp         enable WebP encoding via libwebp [no]
   --enable-libx264         enable H.264 encoding via x264 [no]
   --enable-libx265         enable HEVC encoding via x265 [no]
@@ -1853,6 +1854,7 @@ EXTERNAL_LIBRARY_LIST="
     libshaderc
     libshine
     libsmbclient
+    libsvtvp9
     libsnappy
     libsoxr
     libspeex
@@ -3369,6 +3371,7 @@ libvpx_vp8_decoder_deps="libvpx"
 libvpx_vp8_encoder_deps="libvpx"
 libvpx_vp9_decoder_deps="libvpx"
 libvpx_vp9_encoder_deps="libvpx"
+libsvt_vp9_encoder_deps="libsvtvp9"
 libwebp_encoder_deps="libwebp"
 libwebp_anim_encoder_deps="libwebp"
 libx262_encoder_deps="libx262"
@@ -6649,6 +6652,7 @@ enabled libvpx            && {
     fi
 }
 
+enabled libsvtvp9         && require_pkg_config libsvtvp9 SvtVp9Enc EbSvtVp9Enc.h       eb_vp9_svt_init_handle
 enabled libwebp           && {
     enabled libwebp_encoder      && require_pkg_config libwebp "libwebp >= 0.2.0" webp/encode.h WebPGetEncoderVersion
     enabled libwebp_anim_encoder && check_pkg_config libwebp_anim_encoder "libwebpmux >= 0.4.0" webp/mux.h WebPAnimEncoderOptionsInit; }

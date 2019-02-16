@@ -1082,6 +1082,7 @@ OBJS-$(CONFIG_LIBVPX_VP8_DECODER)         += libvpxdec.o
 OBJS-$(CONFIG_LIBVPX_VP8_ENCODER)         += libvpxenc.o
 OBJS-$(CONFIG_LIBVPX_VP9_DECODER)         += libvpxdec.o libvpx.o
 OBJS-$(CONFIG_LIBVPX_VP9_ENCODER)         += libvpxenc.o libvpx.o
+OBJS-$(CONFIG_LIBSVT_VP9_ENCODER)         += libsvt_vp9.o
 OBJS-$(CONFIG_LIBWEBP_ENCODER)            += libwebpenc_common.o libwebpenc.o
 OBJS-$(CONFIG_LIBWEBP_ANIM_ENCODER)       += libwebpenc_common.o libwebpenc_animencoder.o
 OBJS-$(CONFIG_LIBX262_ENCODER)            += libx264.o

@@ -768,6 +768,7 @@ extern const AVCodec ff_libvpx_vp8_encoder;
 extern const AVCodec ff_libvpx_vp8_decoder;
 extern AVCodec ff_libvpx_vp9_encoder;
 extern AVCodec ff_libvpx_vp9_decoder;
+extern AVCodec ff_libsvt_vp9_encoder;
 /* preferred over libwebp */
 extern const AVCodec ff_libwebp_anim_encoder;
 extern const AVCodec ff_libwebp_encoder;
