@@ -444,9 +444,17 @@ static int update_histogram_diff(struct hist_node *hist,
         for (x = 0; x < f1->width; x++) {
             if (p[x] == q[x])
                 continue;
+
             ret = color_inc(hist, p[x]);
             if (ret < 0)
                 return ret;
+
+            nb_diff_colors += ret;
+
+            ret = color_inc(hist, q[x]);
+            if (ret < 0)
+                return ret;
+
             nb_diff_colors += ret;
         }
     }
