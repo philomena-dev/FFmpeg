@@ -54,6 +54,7 @@ typedef struct GIFContext {
     uint32_t palette[AVPALETTE_COUNT];  ///< local reference palette for !pal8
     int palette_loaded;
     int transparent_index;
+    int force_background;
     uint8_t *tmpl;                      ///< temporary line buffer
 } GIFContext;
 
@@ -267,10 +268,11 @@ static int gif_image_write_image(AVCodecContext *avctx,
     int bcid = -1, honor_transparency = (s->flags & GF_TRANSDIFF) && s->last_frame && !palette;
     const uint8_t *ptr;
 
-    if (!s->image && is_image_translucent(avctx, buf, linesize)) {
+    if (!s->image && (is_image_translucent(avctx, buf, linesize) || s->force_background)) {
         gif_crop_translucent(avctx, buf, linesize, &width, &height, &x_start, &y_start);
         honor_transparency = 0;
         disposal = GCE_DISPOSAL_BACKGROUND;
+        s->force_background = 1;
     } else {
         gif_crop_opaque(avctx, palette, buf, linesize, &width, &height, &x_start, &y_start);
         disposal = GCE_DISPOSAL_INPLACE;
@@ -392,6 +394,7 @@ static av_cold int gif_encode_init(AVCodecContext *avctx)
     }
 
     s->transparent_index = -1;
+    s->force_background = 0;
 
     s->lzw = av_mallocz(ff_lzw_encode_state_size);
     s->buf_size = avctx->width*avctx->height*2 + 1000;
