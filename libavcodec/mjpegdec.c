@@ -1814,6 +1814,10 @@ static int mjpeg_decode_app(MJpegDecodeContext *s)
 
     len = get_bits(&s->gb, 16);
 
+    if (len < 0) {
+        return AVERROR_INVALIDDATA;
+    }
+
     if (len < 6) {
         skip_bits(&s->gb, len);
 
