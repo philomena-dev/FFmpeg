@@ -1303,6 +1303,7 @@ static void do_video_out(OutputFile *of,
             return;
 
         in_picture->pts = ost->sync_opts;
+        in_picture->pkt_duration = av_rescale_q(in_picture->pkt_duration, ost->mux_timebase, av_inv_q(ost->frame_rate));
 
         if (!check_recording_time(ost))
             return;
