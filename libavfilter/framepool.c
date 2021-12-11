@@ -96,7 +96,7 @@ FFFramePool *ff_frame_pool_video_init(AVBufferRef* (*alloc)(size_t size),
         if (i == 1 || i == 2)
             h = AV_CEIL_RSHIFT(h, desc->log2_chroma_h);
 
-        pool->pools[i] = av_buffer_pool_init(pool->linesize[i] * h + 16 + 16 - 1,
+        pool->pools[i] = av_buffer_pool_init(pool->linesize[i] * h + 16 + 16,
                                              alloc);
         if (!pool->pools[i])
             goto fail;
