@@ -86,6 +86,10 @@ static int png_parse(AVCodecParserContext *s, AVCodecContext *avctx,
                     ppc->chunk_pos = -1;
                 else
                     next = ppc->chunk_length + i + 1;
+                if (i + 1 != buf_size - 4) {
+                    // IEND is not at the end of the file!
+                    next = END_NOT_FOUND;
+                }
                 break;
             } else {
                 ppc->chunk_pos = 0;
