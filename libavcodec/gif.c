@@ -512,7 +512,8 @@ static int gif_encode_frame(AVCodecContext *avctx, AVPacket *pkt,
             return ret;
     }
 
-    pkt->size   = outbuf_ptr - pkt->data;
+    pkt->size     = outbuf_ptr - pkt->data;
+    pkt->duration = pict->pkt_duration;
     if (s->image || !avctx->frame_num)
         pkt->flags |= AV_PKT_FLAG_KEY;
     *got_packet = 1;
