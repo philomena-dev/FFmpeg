@@ -2102,6 +2102,7 @@ static int fg_output_frame(OutputFilterPriv *ofp, AVFrame *frame)
                 return ret;
 
             frame_out->pts = ofp->next_pts;
+            frame_out->duration = av_rescale_q(frame_in->duration, ost->enc_timebase, av_inv_q(ost->frame_rate));
 
             if (ofp->fps.dropped_keyframe) {
                 frame_out->flags |= AV_FRAME_FLAG_KEY;
