@@ -2446,9 +2446,11 @@ redo_for_pal8:
                    "restart marker: %d\n", start_code & 0x0f);
             /* APP fields */
         } else if (start_code >= APP0 && start_code <= APP15) {
-            if ((ret = mjpeg_decode_app(s, start_code)) < 0)
+            if ((ret = mjpeg_decode_app(s, start_code)) < 0) {
                 av_log(avctx, AV_LOG_ERROR, "unable to decode APP fields: %s\n",
                        av_err2str(ret));
+                return ret;
+            }
             /* Comment */
         } else if (start_code == COM) {
             ret = mjpeg_decode_com(s);
